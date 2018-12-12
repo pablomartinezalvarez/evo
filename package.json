@@ -1,0 +1,39 @@
+{
+  "name": "evo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Pablo Martinez <pablo.alvarez@casumo.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack -p",
+    "lint": "tslint src/**/*.ts"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/node": "^10.12.12",
+    "@types/random-js": "^1.0.31",
+    "@types/victor": "^1.1.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^5.3.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.119",
+    "@types/pixi.js": "^4.8.4",
+    "lodash": "^4.17.11",
+    "pixi.js": "^4.8.3",
+    "random-js": "^1.0.8",
+    "victor": "^1.1.0"
+  }
+}

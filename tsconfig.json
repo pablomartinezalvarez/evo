@@ -2,11 +2,12 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "sourceMap": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "module": "commonjs",
+    "experimentalDecorators": true,
     "target": "es5",
+    "strict": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "typeRoots": ["node_modules/@types", "src/custom-types"]
   },
   "include": ["./src/**/*"],

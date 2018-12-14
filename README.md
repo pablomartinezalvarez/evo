@@ -8,11 +8,12 @@ EVO illustrates a basic evolutionary ecosystem, with two types of creatures, Veg
 
 ### Vegetarians
 
-They are the rounded blue or pink circular creatures. The vegetarians are able to evolve in time, having a basic DNA that determines their abilities: "size", "vision" and "speed".
+They are the rounded blue or pink circular creatures. The vegetarians are able to evolve in time,
+having a basic DNA that determines their abilities: "size", "vision" and "speed".
 
 #### Habits
 
-Vegetarians will move randomly through the EVO world trying to find a plat to eat or another vegetarian to procreate.
+Vegetarians will move randomly through the EVO world trying to find a plant to eat or another vegetarian to procreate.
 
 When a creature is under his vision it becomes a candidate to be the vegetarian target. 
 Depending on the vegetarian health he will have appetency for eating or procreate.

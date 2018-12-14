@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import Victor = require("victor");
+import Victor from "victor";
 import Creature from "./Creature";
 import Random from "./Random";
 import World from "./World";
@@ -12,9 +12,6 @@ export default class Plant extends Creature {
     constructor(world: World, position: Victor) {
         super(world, position);
 
-        this._velocity = new Victor(0, 0);
-        this._acceleration = new Victor(0, 0);
-        this._topSpeed = 0;
         this._size = 5;
 
         this._graphic = new PIXI.Graphics();

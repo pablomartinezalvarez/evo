@@ -1,9 +1,10 @@
-import _ = require("lodash");
+import _ from "lodash";
 import * as PIXI from "pixi.js";
 import Application = PIXI.Application;
 import Creature from "./Creature";
 import Plant from "./Plant";
 import Vegetarian from "./Vegetarian";
+import Container = PIXI.Container;
 
 export default class World {
 
@@ -32,7 +33,7 @@ export default class World {
             this._creatures[creature.type()] = [];
         }
         this._creatures[creature.type()].push(creature);
-        this._application.stage.addChild(creature.graphic);
+        this._application.stage.addChild((creature.graphic as Container));
     }
 
     public get creatureTypes(): string[] {
@@ -65,7 +66,7 @@ export default class World {
     }
 
     private remove(creature: Creature): void {
-        this._application.stage.removeChild(creature.graphic);
+        this._application.stage.removeChild((creature.graphic as Container));
         const index = this._creatures[creature.type()].indexOf(creature);
         if (index !== -1) {
             this._creatures[creature.type()].splice(index, 1);

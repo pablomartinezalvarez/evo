@@ -1,9 +1,10 @@
 import "./style.css";
 
-import Victor = require("victor");
+import Victor from "victor";
 import Dna from "./Dna";
 import Plant from "./Plant";
 import Random from "./Random";
+import "./ui";
 import Vegetarian from "./Vegetarian";
 import World from "./World";
 

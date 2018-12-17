@@ -1,13 +1,32 @@
 import Vue from "vue";
 import Component from "vue-class-component";
+import Counter from "../../stats/Counter";
+import CounterDataRow from "./CounterDataRow";
 
-// The @Component decorator indicates the class is a Vue component
-@Component({template: '<button @click="onClick">Click!</button>'})
+import eventEmitter from "../../events/EventEmitter";
+
+import "./stats-panel.css";
+
+@Component({
+    components: {
+        "counter-data-row": CounterDataRow,
+    },
+    template: `
+    <div class="stats-panel">
+        <counter-data-row
+            v-for="counter in counters"
+            v-bind:key="counter.name"
+            v-bind:counter="counter"
+            ></counter-data-row>
+    </div>`,
+})
 export default class StatsPanel extends Vue {
 
-    private message: string = "Hello!";
+    private counters: Counter[] = [];
 
-    public onClick(): void {
-        window.alert(this.message);
+    private mounted() {
+        eventEmitter.subscribe("stats:updated", (stats) => {
+            this.counters = stats.counters;
+        });
     }
 }

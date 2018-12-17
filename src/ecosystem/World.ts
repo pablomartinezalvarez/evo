@@ -8,14 +8,15 @@ import Container = PIXI.Container;
 
 export default class World {
 
-    private _creatures: { [key: string]: Creature[] };
-    private _width: number;
-    private _height: number;
+    private readonly _creatures: { [key: string]: Creature[] };
+    private _cycle: number;
+    private readonly _width: number;
+    private readonly _height: number;
     private _application: Application;
 
     constructor() {
         this._creatures = {};
-
+        this._cycle = 0;
         this._width = window.innerWidth;
         this._height = window.innerHeight;
 
@@ -36,6 +37,10 @@ export default class World {
         this._application.stage.addChild((creature.graphic as Container));
     }
 
+    public get cycle(): number {
+        return this._cycle;
+    }
+
     public get creatureTypes(): string[] {
         return _.keys(this._creatures);
     }
@@ -54,6 +59,7 @@ export default class World {
 
     // Implements the main world loop
     private update(): void {
+        ++this._cycle;
         _.forIn(this._creatures, (creatures) => {
             creatures.forEach((creature) => {
                 creature.update();

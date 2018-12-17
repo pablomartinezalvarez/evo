@@ -64,6 +64,17 @@
     "@babel/traverse" "^7.1.0"
     "@babel/types" "^7.0.0"
 
+"@babel/helper-create-class-features-plugin@^7.2.1":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.2.2.tgz#aac79552e41c94716a804d371e943f20171df0c5"
+  integrity sha512-Q4qZE5wS3NWpOS6UV9yhIS/NmSyf2keF0E0IwDvx8WxTheVopVIY6BSQ/0vz72OTTruz0cOA2yIUh6Kdg3qprA==
+  dependencies:
+    "@babel/helper-function-name" "^7.1.0"
+    "@babel/helper-member-expression-to-functions" "^7.0.0"
+    "@babel/helper-optimise-call-expression" "^7.0.0"
+    "@babel/helper-plugin-utils" "^7.0.0"
+    "@babel/helper-replace-supers" "^7.1.0"
+
 "@babel/helper-define-map@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@babel/helper-define-map/-/helper-define-map-7.1.0.tgz#3b74caec329b3c80c116290887c0dd9ae468c20c"
@@ -226,6 +237,14 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-remap-async-to-generator" "^7.1.0"
     "@babel/plugin-syntax-async-generators" "^7.2.0"
+
+"@babel/plugin-proposal-class-properties@^7.2.1":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.2.1.tgz#c734a53e0a1ec40fe5c22ee5069d26da3b187d05"
+  integrity sha512-/4FKFChkQ2Jgb8lBDsvFX496YTi7UWTetVgS8oJUpX1e/DlaoeEK57At27ug8Hu2zI2g8bzkJ+8k9qrHZRPGPA==
+  dependencies:
+    "@babel/helper-create-class-features-plugin" "^7.2.1"
+    "@babel/helper-plugin-utils" "^7.0.0"
 
 "@babel/plugin-proposal-json-strings@^7.2.0":
   version "7.2.0"
@@ -4987,10 +5006,17 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-class-component@^6.3.2:
+vue-class-component@^6.2.0, vue-class-component@^6.3.2:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.3.2.tgz#e6037e84d1df2af3bde4f455e50ca1b9eec02be6"
   integrity sha512-cH208IoM+jgZyEf/g7mnFyofwPDJTM/QvBNhYMjqGB8fCsRyTf68rH2ISw/G20tJv+5mIThQ3upKwoL4jLTr1A==
+
+vue-property-decorator@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-7.2.0.tgz#8e6b0f4dcc630c357135f76366ba7bd91f1db015"
+  integrity sha512-sCI6NVM3tEDg+mpZrQlgkddtxd9LbFWetue8D+nqO3agfSLz0KoC/UIi2P1l5E0TDhcUeIXS9rasuP2HWg+L4w==
+  dependencies:
+    vue-class-component "^6.2.0"
 
 vue@^2.5.21:
   version "2.5.21"

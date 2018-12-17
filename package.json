@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-typescript": "^7.1.0",
     "@types/node": "^10.12.12",
@@ -24,6 +25,8 @@
     "ts-loader": "^5.3.1",
     "tslint": "^5.11.0",
     "typescript": "^3.2.2",
+    "vue-class-component": "^6.3.2",
+    "vue-property-decorator": "^7.2.0",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
@@ -35,7 +38,6 @@
     "pixi.js": "^4.8.3",
     "random-js": "^1.0.8",
     "victor": "^1.1.0",
-    "vue": "^2.5.21",
-    "vue-class-component": "^6.3.2"
+    "vue": "^2.5.21"
   }
 }

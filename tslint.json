@@ -1,16 +1,20 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
     ],
-    "jsRules": {},
-    "rules": {
-        "variable-name": [
-            true,
-            "ban-keywords",
-            "check-format",
-            "allow-leading-underscore"
-        ]
-    },
-    "rulesDirectory": []
+    "interface-name": [
+      true,
+      "never-prefix"
+    ]
+  },
+  "rulesDirectory": []
 }

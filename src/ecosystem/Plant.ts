@@ -1,7 +1,8 @@
+import Victor = require("victor");
+
 import * as PIXI from "pixi.js";
-import Victor from "victor";
+import Random from "../utils/Random";
 import Creature from "./Creature";
-import Random from "./Random";
 import World from "./World";
 import Graphics = PIXI.Graphics;
 
@@ -46,8 +47,14 @@ export default class Plant extends Creature {
             const numChildren = Random.integer(1, 3);
 
             for (let child = 0; child < numChildren; child++) {
-                const xOffset = Random.integer(Random.integer(-100, 100), Random.integer(-100, 100));
-                const yOffset = Random.integer(Random.integer(-100, 100), Random.integer(-100, 100));
+                const xOffset = Random.integer(
+                    Random.integer(-100, 100),
+                    Random.integer(-100, 100),
+                );
+                const yOffset = Random.integer(
+                    Random.integer(-100, 100),
+                    Random.integer(-100, 100),
+                );
                 const childPosition = this.position.clone().add(new Victor(xOffset, yOffset));
 
                 if (childPosition.x > this._world.width) {

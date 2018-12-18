@@ -16,7 +16,13 @@ export default class TotalPopulationOperation implements Operation {
     }
 
     public calculate(world: World): string {
-        return world.getCreaturesOfType(this._species).length.toString();
+        const creatures = world.getCreaturesOfType(this._species);
+
+        if (!creatures) {
+            throw new Error("The species " + this._species + " is not present in the world");
+        }
+
+        return creatures.length.toString();
     }
 
 }

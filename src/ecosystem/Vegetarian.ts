@@ -1,10 +1,11 @@
-import _ from "lodash";
+import Victor = require("victor");
+
+import * as _ from "lodash";
 import * as PIXI from "pixi.js";
-import Victor from "victor";
+import Random from "../utils/Random";
 import Creature from "./Creature";
 import Dna from "./Dna";
 import Plant from "./Plant";
-import Random from "./Random";
 import World from "./World";
 import Graphics = PIXI.Graphics;
 

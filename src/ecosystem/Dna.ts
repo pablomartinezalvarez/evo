@@ -1,5 +1,5 @@
-import _ from "lodash";
-import Random from "./Random";
+import * as _ from "lodash";
+import Random from "../utils/Random";
 
 export default class Dna {
 

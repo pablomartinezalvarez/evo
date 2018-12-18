@@ -1,6 +1,7 @@
-import Victor from "victor";
+import Victor = require("victor");
+
+import Random from "../utils/Random";
 import Dna from "./Dna";
-import Random from "./Random";
 import World from "./World";
 import Container = PIXI.Container;
 
@@ -18,10 +19,10 @@ export default abstract class Creature {
     protected _dna?: Dna;
     protected _graphic?: Container;
 
-    protected constructor(world: World, position: Victor) {
+    protected constructor(world: World, position?: Victor) {
         this._id = Random.uuid4();
         this._world = world;
-        this._position = position;
+        this._position = position || new Victor(0, 0);
         this._velocity = new Victor(0, 0);
         this._acceleration = new Victor(0, 0);
         this._topSpeed = 0;

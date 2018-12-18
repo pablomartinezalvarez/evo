@@ -24,6 +24,7 @@ export default class StatsCollector {
     }
 
     public init() {
+        eventEmitter.emit("stats:updated", {counters: this._counters});
         setInterval(() => {
             this.updateStats();
             eventEmitter.emit("stats:updated", {counters: this._counters});

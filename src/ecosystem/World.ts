@@ -1,10 +1,12 @@
-import _ from "lodash";
+import * as _ from "lodash";
 import * as PIXI from "pixi.js";
 import Application = PIXI.Application;
 import Creature from "./Creature";
 import Plant from "./Plant";
 import Vegetarian from "./Vegetarian";
 import Container = PIXI.Container;
+
+PIXI.utils.skipHello();
 
 export default class World {
 
@@ -34,7 +36,9 @@ export default class World {
             this._creatures[creature.type()] = [];
         }
         this._creatures[creature.type()].push(creature);
-        this._application.stage.addChild((creature.graphic as Container));
+        if (creature.graphic) {
+            this._application.stage.addChild(creature.graphic);
+        }
     }
 
     public get cycle(): number {
@@ -58,7 +62,7 @@ export default class World {
     }
 
     // Implements the main world loop
-    private update(): void {
+    public update(): void {
         ++this._cycle;
         _.forIn(this._creatures, (creatures) => {
             creatures.forEach((creature) => {

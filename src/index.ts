@@ -1,16 +1,14 @@
-import Victor from "victor";
-
+import Victor = require("victor");
 import Dna from "./ecosystem/Dna";
 import Plant from "./ecosystem/Plant";
-import Random from "./ecosystem/Random";
 import Vegetarian from "./ecosystem/Vegetarian";
 import World from "./ecosystem/World";
-
 import Counter from "./stats/Counter";
 import CycleCountOperation from "./stats/operations/CycleCountOperation";
 import PropertyAverageOperation from "./stats/operations/PropertyAverageOperation";
 import TotalPopulationOperation from "./stats/operations/TotalPopulationOperation";
 import StatsCollector from "./stats/StatsCollector";
+import Random from "./utils/Random";
 
 import "./ui/index";
 
@@ -19,13 +17,19 @@ import "./style.css";
 const world = new World();
 
 for (let i = 0; i < 100; i++) {
-    const randomPosition = new Victor(Random.integer(0, world.width), Random.integer(0, world.height));
+    const randomPosition = new Victor(
+        Random.integer(0, world.width),
+        Random.integer(0, world.height),
+    );
 
     world.add(new Plant(world, randomPosition));
 }
 
 for (let i = 0; i < 10; i++) {
-    const randomPosition = new Victor(Random.integer(0, world.width), Random.integer(0, world.height));
+    const randomPosition = new Victor(
+        Random.integer(0, world.width),
+        Random.integer(0, world.height),
+    );
     const randomGenes: { [key: string]: number } = {};
 
     randomGenes[Vegetarian.DNA_SIZE_GEN] = Random.real(0, 1);

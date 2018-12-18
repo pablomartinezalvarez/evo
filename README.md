@@ -1,5 +1,7 @@
 # EVO
 
+![build status](https://travis-ci.org/pablomartinezalvarez/evo.svg?branch=master)
+
 ![evo](./images/evo.gif)
 
 EVO illustrates a basic evolutionary ecosystem, with two types of creatures, Vegetarians and plants.
@@ -8,20 +10,21 @@ EVO illustrates a basic evolutionary ecosystem, with two types of creatures, Veg
 
 ### Vegetarians
 
-They are the rounded blue or pink circular creatures. The vegetarians are able to evolve in time, having a basic DNA that determines their abilities: "size", "vision" and "speed".
+They are the rounded blue or pink circular creatures. The vegetarians are able to evolve in time,
+having a basic DNA that determines their abilities: "size", "vision" and "speed".
 
 #### Habits
 
-Vegetarians will move randomly through the EVO world trying to find a plat to eat or another vegetarian to procreate.
+Vegetarians will move randomly through the EVO world trying to find a plant to eat or another vegetarian to procreate.
 
 When a creature is under his vision it becomes a candidate to be the vegetarian target. 
-Depending on the vegetarian health he will have appetency for eating or procreate.
+Depending on the vegetarian health he will have appetency for eating or procreating.
 
 The vegetarian health decreases with time and increases when he eats a plant.
 
 #### Reproduction
 
-Reproduction could take place when to individuals collide, if one or both of the vegetarians get pregnant their
+Reproduction could take place when two individuals collide, if one or both of the vegetarians get pregnant their
 color will change from blue to pink. During the fecundation, they will save the DNA of his couple to propagate
 it to their unique child.
 
@@ -30,7 +33,7 @@ plus a possible mutation.
 
 ### Plants
 
-They have been created to be eaten. Plants aren't able to move but can reproduce sending some spores around their position.
+Plants aren't able to move but can reproduce sending some spores around their position.
 
 ### Running Locally
 

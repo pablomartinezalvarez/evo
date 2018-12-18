@@ -1,10 +1,11 @@
-import _ = require("lodash");
-import * as PIXI from "pixi.js";
 import Victor = require("victor");
+
+import * as _ from "lodash";
+import * as PIXI from "pixi.js";
+import Random from "../utils/Random";
 import Creature from "./Creature";
 import Dna from "./Dna";
 import Plant from "./Plant";
-import Random from "./Random";
 import World from "./World";
 import Graphics = PIXI.Graphics;
 
@@ -22,17 +23,18 @@ export default class Vegetarian extends Creature {
     private static readonly MAX_VISION = 100;
     private static readonly MAX_SPEED = 1;
 
+    protected _dna: Dna;
     private _color: number;
-    private _coupleDna: Dna;
-    private _vision: number;
+    private readonly _vision: number;
     private _pregnant: boolean;
     private _gestation: number;
-    private _target: Creature;
+    private _coupleDna?: Dna;
+    private _target: Creature | null;
     private _targeted: Creature[];
     private _neighbors: Creature[];
 
-    private _bodyGraphic: Graphics;
-    private _targetGraphic: Graphics;
+    private readonly _bodyGraphic: Graphics;
+    private readonly _targetGraphic: Graphics;
 
     constructor(world: World, position: Victor, dna: Dna) {
         super(world, position);
@@ -40,19 +42,19 @@ export default class Vegetarian extends Creature {
 
         this._velocity = new Victor(0, 0);
         this._acceleration = new Victor(0, 0);
-        this._size = this.dna.getGenOfType(Vegetarian.DNA_SIZE_GEN) * Vegetarian.MAX_SIZE;
-        this._vision = this.dna.getGenOfType(Vegetarian.DNA_VISION_GEN) * Vegetarian.MAX_VISION;
-        this._topSpeed = this.dna.getGenOfType(Vegetarian.DNA_SPEED_GEN) * Vegetarian.MAX_SPEED;
+
+        this._size = dna.getGenOfType(Vegetarian.DNA_SIZE_GEN) * Vegetarian.MAX_SIZE;
+        this._vision = dna.getGenOfType(Vegetarian.DNA_VISION_GEN) * Vegetarian.MAX_VISION;
+        this._topSpeed = dna.getGenOfType(Vegetarian.DNA_SPEED_GEN) * Vegetarian.MAX_SPEED;
 
         // reproduction
         this._pregnant = false;
         this._gestation = 0;
-        this._coupleDna = null;
 
         // social behavior
+        this._target = null;
         this._neighbors = [];
         this._targeted = [];
-        this._target = null;
         this._color = Vegetarian.DEFAULT_COLOR;
 
         // Draws the creature
@@ -60,13 +62,11 @@ export default class Vegetarian extends Creature {
 
         this._bodyGraphic = new PIXI.Graphics();
         this.drawBody();
-        this.graphic.addChild(this._bodyGraphic);
-
+        this._graphic.addChild(this._bodyGraphic);
         this._targetGraphic = new PIXI.Graphics();
-        this.graphic.addChild(this._targetGraphic);
-
-        this.graphic.position.x = this.position.x;
-        this.graphic.position.y = this.position.y;
+        this._graphic.addChild(this._targetGraphic);
+        this._graphic.position.x = this.position.x;
+        this._graphic.position.y = this.position.y;
     }
 
     public type(): string {
@@ -103,10 +103,10 @@ export default class Vegetarian extends Creature {
             this._pregnant = true;
             this._gestation = 250;
             this._color = Vegetarian.PREGNANT_COLOR;
-            this._coupleDna = creature.dna;
+            this._coupleDna = creature.dna as Dna;
         }
         // The target has been reached.
-        this._targeted.push(this._target);
+        this._targeted.push(this._target!);
         this.cleanTarget();
     }
 
@@ -130,7 +130,7 @@ export default class Vegetarian extends Creature {
         this._position = this.position.add(this._velocity);
     }
 
-    // Updates the list of neighbors, targeted neighbors are blacklisted during 100 cycles.
+    // Updates the list of neighbors, targeted neighbours are blacklisted during 100 cycles.
     private updateNeighbors(): void {
         this._neighbors = [];
 
@@ -163,7 +163,8 @@ export default class Vegetarian extends Creature {
         if (!this._target || this._neighbors.indexOf(this._target) === -1) {
             if (this.isHungry()) {
                 this._neighbors.some((neighbor) =>
-                    Plant.TYPE === neighbor.type() ? ((this._target = neighbor), true) : false);
+                    Plant.TYPE === neighbor.type()
+                        ? ((this._target = neighbor), true) : false);
             } else {
                 this._neighbors.some((neighbor) =>
                     Vegetarian.TYPE === neighbor.type() && neighbor.isFertile()
@@ -174,7 +175,7 @@ export default class Vegetarian extends Creature {
 
     // Reproduction logic. Once the gestation period is reached, a new creature is born.
     private reproduce(): void {
-        if (this._pregnant) {
+        if (this._pregnant && this._coupleDna) {
             this._gestation -= 1;
             if (this._gestation <= 0 && this._health > 0.5) {
                 let childDna = this.crossover(this._coupleDna);
@@ -189,7 +190,7 @@ export default class Vegetarian extends Creature {
     }
 
     private crossover(coupleDna: Dna): Dna {
-        return new Dna(_.mapValues(this.dna.genes, (value, type) => {
+        return new Dna(_.mapValues(this._dna.genes, (value, type) => {
             return 0.5 < Random.real(0, 1)
                 ? value
                 : coupleDna.getGenOfType(type);
@@ -197,7 +198,7 @@ export default class Vegetarian extends Creature {
     }
 
     // The creature dies on each world cycle.
-     private die() {
+    private die() {
         this.hurt(this._pregnant ? 0.002 : 0.001);
     }
 
@@ -238,12 +239,14 @@ export default class Vegetarian extends Creature {
 
     // Draws current target
     private drawTarget(): void {
-        this._targetGraphic.lineStyle(1, this._color, 1);
-        this._targetGraphic.alpha = this._health;
-        this._targetGraphic.moveTo(0, 0);
-        this._targetGraphic.lineTo(
-            this._target.position.x - this.position.x,
-            this._target.position.y - this.position.y);
+        if (this._target) {
+            this._targetGraphic.lineStyle(1, this._color, 1);
+            this._targetGraphic.alpha = this._health;
+            this._targetGraphic.moveTo(0, 0);
+            this._targetGraphic.lineTo(
+                this._target.position.x - this.position.x,
+                this._target.position.y - this.position.y);
+        }
     }
 
     // Changes the creature position to deal with the world edges.

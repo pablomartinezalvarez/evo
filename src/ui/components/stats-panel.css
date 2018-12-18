@@ -1,0 +1,9 @@
+.stats-panel{
+    background-color: #1b1b1b;
+    position: fixed;
+    top: 1vw;
+    right: 1vw;
+    padding: 0.6em;
+    opacity: .8;
+    border-radius: .3em;
+}

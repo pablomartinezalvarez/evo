@@ -1,0 +1,18 @@
+.counter-data-row {
+    display: flex;
+    margin: .5em 0 .5em 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eeeeee;
+    font-size: .75em;
+}
+
+.row-cell {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 8em;
+}
+
+.counter-data-row-value {
+    text-align: right;
+}

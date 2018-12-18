@@ -1,9 +1,9 @@
-import _ = require("lodash");
-import Random from "./Random";
+import * as _ from "lodash";
+import Random from "../utils/Random";
 
 export default class Dna {
 
-    private _genes: { [key: string]: number };
+    private readonly _genes: { [key: string]: number };
 
     constructor(newGenes: { [key: string]: number }) {
         this._genes = newGenes;

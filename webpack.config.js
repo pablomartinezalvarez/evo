@@ -32,7 +32,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        extensions: ['.ts', '.js', '.html'],
+        alias: {
+            vue$: 'vue/dist/vue.esm.js'
+        }
     },
     output: {
         filename: 'index.js',

@@ -1,6 +1,7 @@
 import Victor = require("victor");
+
+import Random from "../utils/Random";
 import Dna from "./Dna";
-import Random from "./Random";
 import World from "./World";
 import Container = PIXI.Container;
 
@@ -12,16 +13,20 @@ export default abstract class Creature {
     protected _acceleration: Victor;
     protected _topSpeed: number;
     protected _size: number;
-    protected _graphic: Container;
-    protected _world: World;
     protected _health: number;
     protected _age: number;
-    protected _dna: Dna;
+    protected _world: World;
+    protected _dna?: Dna;
+    protected _graphic?: Container;
 
-    protected constructor(world: World, position: Victor) {
+    protected constructor(world: World, position?: Victor) {
         this._id = Random.uuid4();
         this._world = world;
-        this._position = position;
+        this._position = position || new Victor(0, 0);
+        this._velocity = new Victor(0, 0);
+        this._acceleration = new Victor(0, 0);
+        this._topSpeed = 0;
+        this._size = 0;
         this._health = 1;
         this._age = 0;
     }
@@ -29,9 +34,11 @@ export default abstract class Creature {
     public abstract type(): string;
 
     public update(): void {
-        this._graphic.alpha = this._health;
-        this._graphic.position.x = this.position.x;
-        this._graphic.position.y = this.position.y;
+        if (this._graphic) {
+            this._graphic.alpha = this._health;
+            this._graphic.position.x = this.position.x;
+            this._graphic.position.y = this.position.y;
+        }
         this._age += 1;
     }
 
@@ -63,11 +70,11 @@ export default abstract class Creature {
         return this._size;
     }
 
-    public get graphic(): Container {
+    public get graphic(): Container | undefined {
         return this._graphic;
     }
 
-    public get dna(): Dna {
+    public get dna(): Dna | undefined {
         return this._dna;
     }
 }

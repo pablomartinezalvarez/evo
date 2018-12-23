@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
-import Counter from "../../stats/Counter";
+import Sample from "../../stats/Sample";
 import CounterDataRow from "./CounterDataRow";
 
 import eventEmitter from "../../events/EventEmitter";
@@ -14,19 +14,19 @@ import "./stats-panel.css";
     template: `
     <div class="stats-panel">
         <counter-data-row
-            v-for="counter in counters"
-            v-bind:key="counter.name"
-            v-bind:counter="counter"
+            v-for="sample in samples"
+            v-bind:key="sample.name"
+            v-bind:sample="sample"
             ></counter-data-row>
     </div>`,
 })
 export default class StatsPanel extends Vue {
 
-    private counters: Counter[] = [];
+    private samples: Sample[] = [];
 
     private mounted() {
-        eventEmitter.subscribe("stats:updated", (stats) => {
-            this.counters = stats.counters;
+        eventEmitter.subscribe("stats:updated", (data) => {
+            this.samples = data.samples;
         });
     }
 }

@@ -1,4 +1,4 @@
-.stats-panel{
+.stats-panel {
     background-color: #1b1b1b;
     position: fixed;
     top: 1vw;
@@ -6,4 +6,20 @@
     padding: 0.6em;
     opacity: .8;
     border-radius: .3em;
+}
+
+.stats-panel button {
+    width: 100%;
+    padding: .7em;
+    border-radius: .5em;
+    text-transform: uppercase;
+    background-color: transparent;
+    color: #eee;
+    border-color: #eee;
+    margin-top: .5em;
+    outline: none;
+}
+
+.stats-panel button:hover {
+    background-color: #2b2b2b;
 }

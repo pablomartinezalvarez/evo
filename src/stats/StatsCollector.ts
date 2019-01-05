@@ -1,17 +1,14 @@
 import World from "../ecosystem/World";
 import Counter from "./Counter";
 import Sample from "./Sample";
-
+import Events from "../events/Events";
 import eventEmitter from "../events/EventEmitter";
 
 export default class StatsCollector {
 
-    public static STATS_UPDATED_EVENT = "stats:updated";
-
     private _world: World;
     private readonly _counters: Counter[];
     private readonly _sampleInterval: number;
-    private _interval?: NodeJS.Timeout;
 
     constructor(world: World, sampleInterval: number) {
         this._world = world;
@@ -28,16 +25,11 @@ export default class StatsCollector {
     }
 
     public init() {
-        eventEmitter.emit(StatsCollector.STATS_UPDATED_EVENT, {samples: this.takeSamples()});
-        this._interval = setInterval(() => {
-            eventEmitter.emit(StatsCollector.STATS_UPDATED_EVENT, {samples: this.takeSamples()});
-        }, this._sampleInterval);
-    }
-
-    public clear() {
-        if (this._interval) {
-            clearInterval(this._interval);
-        }
+        eventEmitter.subscribe(Events.WORLD_TICK_EVENT, (data) => {
+            if (data.cycle % this._sampleInterval === 0) {
+                eventEmitter.emit(Events.STATS_UPDATED_EVENT, {cycle: data.cycle, samples: this.takeSamples()});
+            }
+        });
     }
 
     private takeSamples(): Sample[] {

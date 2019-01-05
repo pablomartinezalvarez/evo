@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Component from "vue-class-component";
+import eventEmitter from "../../events/EventEmitter";
+import Events from "../../events/Events";
 import Sample from "../../stats/Sample";
 import CounterDataRow from "./CounterDataRow";
 
-import eventEmitter from "../../events/EventEmitter";
-
 import "./stats-panel.css";
+import CSVExporter from "../../stats/exporters/CSVExporter";
 
 @Component({
     components: {
@@ -18,6 +19,7 @@ import "./stats-panel.css";
             v-bind:key="sample.name"
             v-bind:sample="sample"
             ></counter-data-row>
+           <button v-on:click="exportStats">Export Stats</button>
     </div>`,
 })
 export default class StatsPanel extends Vue {
@@ -25,8 +27,12 @@ export default class StatsPanel extends Vue {
     private samples: Sample[] = [];
 
     private mounted() {
-        eventEmitter.subscribe("stats:updated", (data) => {
+        eventEmitter.subscribe(Events.STATS_UPDATED_EVENT, (data) => {
             this.samples = data.samples;
         });
+    }
+
+    private exportStats() {
+        eventEmitter.emit(Events.STATS_EXPORT_EVENT, {type: CSVExporter.TYPE});
     }
 }

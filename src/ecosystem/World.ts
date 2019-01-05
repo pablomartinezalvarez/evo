@@ -1,10 +1,13 @@
 import * as _ from "lodash";
 import * as PIXI from "pixi.js";
 import Application = PIXI.Application;
+import Container = PIXI.Container;
 import Creature from "./Creature";
 import Plant from "./Plant";
 import Vegetarian from "./Vegetarian";
-import Container = PIXI.Container;
+
+import eventEmitter from "../events/EventEmitter";
+import Events from "../events/Events";
 
 PIXI.utils.skipHello();
 
@@ -63,6 +66,11 @@ export default class World {
 
     // Implements the main world loop
     public update(): void {
+
+        if (this._cycle % 10 === 0) {
+            eventEmitter.emit(Events.WORLD_TICK_EVENT, {cycle: this._cycle});
+        }
+
         ++this._cycle;
         _.forIn(this._creatures, (creatures) => {
             creatures.forEach((creature) => {

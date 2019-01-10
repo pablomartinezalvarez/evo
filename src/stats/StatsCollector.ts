@@ -1,8 +1,8 @@
 import World from "../ecosystem/World";
+import eventEmitter from "../events/EventEmitter";
+import Events from "../events/Events";
 import Counter from "./Counter";
 import Sample from "./Sample";
-import Events from "../events/Events";
-import eventEmitter from "../events/EventEmitter";
 
 export default class StatsCollector {
 
@@ -27,18 +27,21 @@ export default class StatsCollector {
     public init() {
         eventEmitter.subscribe(Events.WORLD_TICK_EVENT, (data) => {
             if (data.cycle % this._sampleInterval === 0) {
-                eventEmitter.emit(Events.STATS_UPDATED_EVENT, {cycle: data.cycle, samples: this.takeSamples()});
+                eventEmitter.emit(
+                    Events.STATS_UPDATED_EVENT,
+                    {cycle: data.cycle, samples: this.takeSamples(data.cycle)},
+                );
             }
         });
     }
 
-    private takeSamples(): Sample[] {
+    private takeSamples(cycle: number): Sample[] {
         return this._counters.map((counter) => {
             return new Sample(
                 counter.name,
                 counter.label,
                 counter.operation.calculate(this._world),
-                this._world.cycle,
+                cycle,
             );
         });
     }

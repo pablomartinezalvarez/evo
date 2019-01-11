@@ -40,7 +40,7 @@ export default class Plant extends Creature {
 
     private reproduce(): void {
         if (
-            this._world.getCreaturesOfType(this.type()).length < 1000
+            this._world.getCreaturesOfType(this.type()).length < 100
             && this._age % 100 === 0
             && 0.1 > Random.real(0, 1)
         ) {

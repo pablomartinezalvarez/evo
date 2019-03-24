@@ -35,11 +35,13 @@
     "vue-property-decorator": "^7.2.0",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "@types/file-saver": "^2.0.0",
     "@types/lodash": "^4.14.119",
     "@types/pixi.js": "^4.8.4",
+    "file-saver": "^2.0.0",
     "lodash": "^4.17.11",
     "pixi.js": "^4.8.3",
     "random-js": "^1.0.8",

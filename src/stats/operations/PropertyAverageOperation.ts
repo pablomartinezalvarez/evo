@@ -24,7 +24,7 @@ export default class PropertyAverageOperation implements Operation {
             throw new Error("The species " + this._species + " is not present in the world");
         }
 
-        return (creatures.reduce((sum, creature) => {
+        const total = creatures.reduce((sum, creature) => {
             const propertyDescription = Object.getOwnPropertyDescriptor(creature, `_${this._property}`);
 
             if (!propertyDescription) {
@@ -32,8 +32,11 @@ export default class PropertyAverageOperation implements Operation {
             }
 
             return sum + propertyDescription.value;
+        }, 0);
 
-        }, 0) / creatures.length).toFixed(2);
+        const avg = total > 0 ? total / creatures.length : total;
+
+        return avg.toFixed(2);
     }
 
 }

@@ -1,10 +1,17 @@
-import {saveAs} from "file-saver";
 import * as _ from "lodash";
 import Exporter from "./Exporter";
 
 export default class CSVExporter implements Exporter {
 
     public static TYPE = "csv";
+
+    private readonly _save: any;
+    private readonly _fileName: string;
+
+    constructor(save: any, fileName: string) {
+        this._save = save;
+        this._fileName = fileName;
+    }
 
     public type() {
         return CSVExporter.TYPE;
@@ -31,6 +38,6 @@ export default class CSVExporter implements Exporter {
 
         const blob = new Blob(csvContent, {type: "text/csv;charset=utf-8"});
 
-        saveAs(blob, "stats.csv");
+        this._save(blob, this._fileName);
     }
 }

@@ -6,7 +6,7 @@ import Sample from "./Sample";
 
 export default class StatsCollector {
 
-    private _world: World;
+    private readonly _world: World;
     private readonly _counters: Counter[];
     private readonly _sampleInterval: number;
 
@@ -14,10 +14,6 @@ export default class StatsCollector {
         this._world = world;
         this._sampleInterval = sampleInterval;
         this._counters = [];
-    }
-
-    public set world(world: World) {
-        this._world = world;
     }
 
     public registerCounter(counter: Counter) {

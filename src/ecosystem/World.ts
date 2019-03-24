@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import * as PIXI from "pixi.js";
+
 import Application = PIXI.Application;
 import Container = PIXI.Container;
 import Creature from "./Creature";
@@ -66,13 +67,10 @@ export default class World {
 
     // Implements the main world loop
     public update(): void {
-
-        if (this._cycle % 10 === 0) {
-            eventEmitter.emit(Events.WORLD_TICK_EVENT, {cycle: this._cycle});
-        }
+        eventEmitter.emit(Events.WORLD_TICK_EVENT, {cycle: this._cycle});
 
         ++this._cycle;
-        _.forIn(this._creatures, (creatures) => {
+        _.forIn(this._creatures, (creatures: Creature[]) => {
             creatures.forEach((creature) => {
                 creature.update();
                 this.handleCollisions(creature);
@@ -95,7 +93,7 @@ export default class World {
     }
 
     private handleCollisions(creature: Creature) {
-        _.forIn(this._creatures, (creatures) => {
+        _.forIn(this._creatures, (creatures: Creature[]) => {
             creatures.forEach((otherCreature) => {
                 const distance = creature.position.distance(otherCreature.position);
                 if (creature.id !== otherCreature.id && distance < (creature.size + otherCreature.size) / 2) {

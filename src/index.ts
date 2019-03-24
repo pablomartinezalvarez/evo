@@ -1,5 +1,6 @@
 import "./style.css";
 import "./ui/index";
+import {saveAs} from "file-saver";
 
 import Victor = require("victor");
 import Dna from "./ecosystem/Dna";
@@ -19,7 +20,7 @@ import Random from "./utils/Random";
 const world = new World();
 
 // Init plants population.
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 250; i++) {
     const randomPosition = new Victor(
         Random.integer(0, world.width),
         Random.integer(0, world.height),
@@ -87,7 +88,7 @@ statsCollector.registerCounter(new Counter(
 const statsRecorder = new StatsRecorder(500);
 const statsExporter = new StatsExporter(statsRecorder);
 
-statsExporter.registerExporter(new CSVExporter());
+statsExporter.registerExporter(new CSVExporter(saveAs, "stats.csv"));
 
 world.run();
 statsCollector.init();
